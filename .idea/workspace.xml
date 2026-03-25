@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6cec6685-8000-41d7-8394-9c5332d3e883" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/finatlon.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend_finatlon/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend_finatlon/backend_api/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend_finatlon/backend_api/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend_finatlon/backend_api/urls.py" afterDir="false" />
-    </list>
+    <list default="true" id="6cec6685-8000-41d7-8394-9c5332d3e883" name="Changes" comment="allowed_hosts" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,6 +19,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
@@ -76,6 +65,19 @@
       <option name="presentableId" value="Default" />
       <updated>1774308357849</updated>
     </task>
+    <task id="LOCAL-00001" summary="allowed_hosts">
+      <option name="closed" value="true" />
+      <created>1774431074981</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774431074981</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="allowed_hosts" />
+    <option name="LAST_COMMIT_MESSAGE" value="allowed_hosts" />
   </component>
 </project>
