@@ -386,3 +386,84 @@ class Goal(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Listener(models.Model):
+    STATUS_CHOICES = [
+        ('bachelor', 'Студент Бакалавриата'),
+        ('master', 'Студент Магистратуры'),
+        ('specialist', 'Студент Специалитета'),
+        ('postgraduate', 'Аспирант'),
+        ('teacher', 'Преподаватель/научный сотрудник'),
+        ('manager', 'Руководитель/менеджер'),
+        ('entrepreneur', 'Предприниматель'),
+        ('media', 'СМИ'),
+        ('other', 'Другое'),
+    ]
+    LEVEL_CHOICES = [
+        ('beginner', 'Начинающий (общий интерес)'),
+        ('basic', 'Базовый (теоретические знания)'),
+        ('advanced', 'Продвинутый (практический опыт)'),
+        ('expert', 'Экспертный (профессиональная деятельность)'),
+    ]
+    FORMAT_CHOICES = [
+        ('offline', 'Очное участие'),
+        ('online', 'Онлайн участие'),
+    ]
+
+    # Личные данные (обязательные)
+    last_name = models.CharField(max_length=100, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=100, verbose_name='Имя')
+    patronymic = models.CharField(max_length=100, blank=True, verbose_name='Отчество')
+    email = models.EmailField(verbose_name='Email')
+    phone = models.CharField(max_length=20, verbose_name='Телефон')
+    work_study = models.CharField(max_length=255, verbose_name='Место работы/учебы')
+
+    # Статус участника
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, verbose_name='Статус участника')
+    other_status = models.CharField(max_length=100, blank=True, verbose_name='Другое (статус)')
+
+    # Для СМИ – индикатор, по которому в представлениях можно выводить информацию об аккредитации
+    is_media = models.BooleanField(default=False, verbose_name='СМИ')
+
+    # Интересы участия
+    section = models.ForeignKey(
+        Section, on_delete=models.SET_NULL, null=True, verbose_name='Интересующая секция'
+    )
+    preparation_level = models.CharField(max_length=10, choices=LEVEL_CHOICES, verbose_name='Уровень подготовки по тематике')
+
+    # Цели участия (многие ко многим, используются существующая модель Goal)
+    goals = models.ManyToManyField('Goal', blank=True, verbose_name='Цели участия')
+    other_goal = models.CharField(max_length=200, blank=True, verbose_name='Другая цель')
+
+    # Формат участия
+    format_participation = models.CharField(max_length=10, choices=FORMAT_CHOICES, verbose_name='Формат участия')
+
+    # --- Поля для очного формата ---
+    citizenship = models.CharField(max_length=50, blank=True, verbose_name='Гражданство')
+    passport_series = models.CharField(max_length=4, blank=True, verbose_name='Серия паспорта')
+    passport_number = models.CharField(max_length=6, blank=True, verbose_name='Номер паспорта')
+    passport_issued_by = models.CharField(max_length=255, blank=True, verbose_name='Кем выдан')
+    passport_issued_date = models.DateField(null=True, blank=True, verbose_name='Дата выдачи')
+    registration_address = models.TextField(blank=True, verbose_name='Адрес регистрации')
+    visa_type = models.CharField(max_length=50, blank=True, verbose_name='Тип визы')
+    visa_number = models.CharField(max_length=50, blank=True, verbose_name='Номер визы')
+    visa_valid_from = models.DateField(null=True, blank=True, verbose_name='Виза действительна с')
+    visa_valid_to = models.DateField(null=True, blank=True, verbose_name='Виза действительна по')
+    visa_multiple = models.CharField(max_length=20, blank=True, verbose_name='Кратность визы')
+    migration_registration = models.TextField(blank=True, verbose_name='Миграционный учет')
+    # ВУЗ/место работы уже есть в общем поле work_study, повторно не добавляем
+
+    # Согласия
+    consent_passport_transfer = models.BooleanField(
+        default=False, verbose_name='Согласие на передачу паспортных данных службе безопасности'
+    )
+    consent_personal_data = models.BooleanField(verbose_name='Согласие на обработку персональных данных')
+
+    class Meta:
+        verbose_name = 'Слушатель'
+        verbose_name_plural = 'Слушатели'
+        ordering = ['last_name', 'first_name']
+
+    def __str__(self):
+        return f"{self.last_name} {self.first_name} – {self.get_status_display()}"
